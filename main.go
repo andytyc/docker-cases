@@ -11,7 +11,7 @@ import (
 
 func init() {
 	flag.BoolVar(&conf.FlagBlock, conf.FlagBlockName, conf.FlagBlockValue, conf.FlagBlockUsage)
-	flag.IntVar(&conf.FlagCase, conf.FlagCaseName, conf.FlagCaseValueC1000HelloWorld, conf.FlagCaseUsage)
+	flag.IntVar(&conf.FlagCase, conf.FlagCaseName, conf.FlagCaseValueC1000HelloWorld, conf.FlagCasePrintOptions())
 
 	flag.Parse()
 }
