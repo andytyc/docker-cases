@@ -4,10 +4,22 @@
 
 # docker
 
+- 例子
+
 ```bash
 # build
 docker build -t docker-cases:v1.0 .
 
 # run
 docker run docker-cases:v1.0 "-case=1001" "-block=true"
+```
+
+- debug 例子
+
+```bash
+# build
+docker build --target=build -t docker-cases:v2.0 .
+
+# run
+docker run docker-cases:v2.0 "-case=1001" "-block=true"
 ```
