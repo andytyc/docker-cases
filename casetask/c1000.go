@@ -2,6 +2,6 @@ package casetask
 
 import "fmt"
 
-func C100HelloWorld() {
+func C1000HelloWorld() {
 	fmt.Printf("Hello World!\n")
 }

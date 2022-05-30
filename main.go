@@ -11,15 +11,17 @@ import (
 
 func init() {
 	flag.BoolVar(&conf.FlagBlock, conf.FlagBlockName, conf.FlagBlockValue, conf.FlagBlockUsage)
-	flag.IntVar(&conf.FlagCase, conf.FlagCaseName, conf.FlagCaseValueHelloWorld, conf.FlagCaseUsage)
+	flag.IntVar(&conf.FlagCase, conf.FlagCaseName, conf.FlagCaseValueC1000HelloWorld, conf.FlagCaseUsage)
 
 	flag.Parse()
 }
 
 func main() {
 	switch conf.FlagCase {
-	case conf.FlagCaseValueHelloWorld:
-		casetask.C100HelloWorld()
+	case conf.FlagCaseValueC1000HelloWorld:
+		casetask.C1000HelloWorld()
+	case conf.FlagCaseValueC1001OSENV:
+		casetask.C1001OSENV()
 	default:
 		fmt.Printf("value of param [%s] is invaild : %d\n", conf.FlagCaseName, conf.FlagCase)
 	}
