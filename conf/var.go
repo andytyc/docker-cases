@@ -17,11 +17,13 @@ const (
 	FlagCaseUsage                = "示例编号, 默认:1000"
 	FlagCaseValueC1000HelloWorld = 1000
 	FlagCaseValueC1001OSENV      = 1001
+	FlagCaseValueC1002OSExec     = 1002
 )
 
 var FlagCaseUsageMap = map[int]string{
 	FlagCaseValueC1000HelloWorld: "Hello World !",
 	FlagCaseValueC1001OSENV:      "os env",
+	FlagCaseValueC1002OSExec:     "os exec cmd",
 }
 
 var FlagCase int

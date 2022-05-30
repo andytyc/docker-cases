@@ -22,6 +22,8 @@ func main() {
 		casetask.C1000HelloWorld()
 	case conf.FlagCaseValueC1001OSENV:
 		casetask.C1001OSENV()
+	case conf.FlagCaseValueC1002OSExec:
+		casetask.C1002OSExec()
 	default:
 		fmt.Printf("value of param [%s] is invaild : %d\n", conf.FlagCaseName, conf.FlagCase)
 	}
