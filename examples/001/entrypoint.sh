@@ -5,13 +5,15 @@ CMD=$1
 case "$CMD" in
   "dev" )
     echo "--- dev ---"
-    source /app/env.sh
+    # 加载环境无效
+    # /bin/bash -c "source /app/env.sh"
     exec /app/docker-cases -case=1001
     ;;
 
   "start" )
     echo "--- start ---"
-    source /app/env.sh
+    # 加载环境无效
+    # /bin/bash -c "source /app/env.sh"
     exec /app/docker-cases -case=1001 -block=true
     ;;
 
