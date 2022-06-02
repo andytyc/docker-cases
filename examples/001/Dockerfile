@@ -11,16 +11,20 @@ RUN go mod tidy \
     && chmod +x /app/entrypoint.sh \
     && chmod +x /app/env.sh
 
+# FROM ubuntu:16.04
+FROM ubuntu:16.04
+
+COPY --from=build /app /app
+
 # source 加载环境无效, 还是通过 ENV 来设置吧
 # RUN /bin/bash -c "source /app/env.sh"
 # ps:
 # 静态(几乎不变化): 在Dockerfile中设置
 # 动态(几乎变化): 在docker run -e 参数中设置
+# 
+# 平时这些地址和密码都是动态的,我们这边测试demo就先放在Dockerfile中
 ENV DARWIN_ETCD_ENDPOINTS=192.168.0.4:2379
 ENV DARWIN_ETCD_AUTH=root:demo666
 
-# FROM ubuntu:16.04
-FROM ubuntu:16.04
-COPY --from=build /app /app
 CMD ["start"]
 ENTRYPOINT ["/app/entrypoint.sh"]
