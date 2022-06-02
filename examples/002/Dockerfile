@@ -12,8 +12,10 @@ COPY --from=build /app /app
 RUN chmod +x /app/entrypoint.sh \
     && chmod +x /app/env.sh
 
-ENV DARWIN_ETCD_ENDPOINTS=192.168.0.4:2379
-ENV DARWIN_ETCD_AUTH=root:demo666
+ENV ALG_DIR=/home/watrix/darwin/algorithms
+ENV RecognitionSDK_HOME=$ALG_DIR/model_encryption_64
+ENV LD_LIBRARY_PATH=$ALG_DIR/lib_core_64:$ALG_DIR/lib_64:$ALG_DIR/lib_64/tensorrt
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/lib:/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib:/lib64:/lib
 
 CMD ["pro"]
 ENTRYPOINT ["/app/entrypoint.sh"]
