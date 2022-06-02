@@ -17,6 +17,31 @@ ALG_DIR: /home/watrix/darwin/algorithms
 RecognitionSDK_HOME: /home/watrix/darwin/algorithms/model_encryption_64
 LD_LIBRARY_PATH: /home/watrix/darwin/algorithms/lib_core_64:/home/watrix/darwin/algorithms/lib_64:/home/watrix/darwin/algorithms/lib_64/tensorrt:/usr/local/cuda/lib64:/usr/local/lib:/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib:/lib64:/lib
 '''
+
+# 进入容器看看, algorithms 目录是空的
+root@watrix:/home/watrix/chuyt/test/docker-cases# docker exec -it d002 /bin/bash
+'''
+root@820853df30d2:/home/watrix/darwin/algorithms# pwd
+/home/watrix/darwin/algorithms
+root@820853df30d2:/home/watrix/darwin/algorithms# ls
+'''
+
+# 启动时，挂载主机目录
+# 目的: 将主机中的某目录可以在容器中可见
+# -v 主机目录路径:容器目录路径
+docker run --name d002 \
+-v /home/watrix/darwin/algorithms:/home/watrix/darwin/algorithms \
+d002
+
+# 进入容器的目录看看
+root@watrix:/home/watrix/chuyt/test/docker-cases# docker exec -it d002 /bin/bash
+'''
+root@eef0ebf097f0:/home/watrix/darwin/algorithms# pwd
+/home/watrix/darwin/algorithms
+root@eef0ebf097f0:/home/watrix/darwin/algorithms# ls
+compile.sh  env.sh      go.mod   lib_64   lib_core_64   lib_core_nx          model_encryption_arm  sdk       sdk_camera  third_party
+env         env.sh.bak  install  lib_arm  lib_core_arm  model_encryption_64  model_encryption_nx   sdk_base  sdk_v2      update.sh
+'''
 ```
 
 # 删除容器，删除镜像
