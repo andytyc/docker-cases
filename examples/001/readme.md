@@ -137,3 +137,45 @@ PATH: /usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbi
 1. Dockerfile 中设置`ENV`，备注："静态"环境变量(几乎不变化)在 Dockerfile 中设置
 
 2. `docker run -e` 启动容器时来设置环境变量，备注："动态"环境变量(几乎可能变化): 在 docker run -e 参数中设置
+
+```Dockerfile
+FROM golang:1.16.4 AS build
+ENV GOPROXY=https://goproxy.cn,direct
+COPY . /code/docker-cases
+WORKDIR /code/docker-cases
+RUN go mod tidy \
+    && go build -ldflags "-s -w" -o /app/docker-cases \
+    && cp /code/docker-cases/examples/001/env.sh /app/env.sh \
+    && cp /code/docker-cases/examples/001/entrypoint.sh /app/entrypoint.sh
+
+# FROM ubuntu:16.04
+FROM ubuntu:16.04
+COPY --from=build /app /app
+RUN chmod +x /app/entrypoint.sh \
+    && chmod +x /app/env.sh
+# && /bin/bash -c "source /app/env.sh"
+
+ENV DARWIN_ETCD_ENDPOINTS=192.168.0.4:2379
+ENV DARWIN_ETCD_AUTH=root:demo666
+
+CMD ["pro"]
+ENTRYPOINT ["/app/entrypoint.sh"]
+```
+
+```bash
+root@watrix:/home/watrix/chuyt/test/docker-cases# docker run --name d001 d001
+'''
+--- pro ---
+DARWIN_ETCD_ENDPOINTS: 192.168.0.4:2379 DARWIN_ETCD_AUTH: root:demo666
+ALG_DIR:
+PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+'''
+
+root@watrix:/home/watrix/chuyt/test/docker-cases# docker run -e ALG_DIR=/home/watrix/ --name d001 d001
+'''
+--- pro ---
+DARWIN_ETCD_ENDPOINTS: 192.168.0.4:2379 DARWIN_ETCD_AUTH: root:demo666
+ALG_DIR: /home/watrix/
+PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+'''
+```
