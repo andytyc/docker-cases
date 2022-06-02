@@ -16,7 +16,7 @@ func C1001OSENV() {
 	ALG_DIR := os.Getenv("ALG_DIR")
 	fmt.Println("ALG_DIR:", ALG_DIR)
 
-	ALG_RecognitionSDK_HOMEDIR := os.Getenv("RecognitionSDK_HOME")
+	RecognitionSDK_HOME := os.Getenv("RecognitionSDK_HOME")
 	fmt.Println("RecognitionSDK_HOME:", RecognitionSDK_HOME)
 
 	LD_LIBRARY_PATH := os.Getenv("LD_LIBRARY_PATH")
