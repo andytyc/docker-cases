@@ -4,8 +4,8 @@ COPY . /code/docker-cases
 WORKDIR /code/docker-cases
 RUN go mod tidy \
     && go build -ldflags "-s -w" -o /app/docker-cases \
-    && cp /code/docker-cases/examples/001/env.sh /app/env.sh \
-    && cp /code/docker-cases/examples/001/entrypoint.sh /app/entrypoint.sh
+    && cp /code/docker-cases/examples/002/env.sh /app/env.sh \
+    && cp /code/docker-cases/examples/002/entrypoint.sh /app/entrypoint.sh
 
 FROM nvidia/cuda:11.5.0-base-ubuntu20.04
 COPY --from=build /app /app
